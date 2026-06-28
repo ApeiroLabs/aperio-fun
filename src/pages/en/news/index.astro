@@ -9,19 +9,19 @@ const issues = (await getCollection("dailyNews"))
 const dates = issues.map((issue) => issue.date).sort().reverse();
 ---
 
-<BaseLayout locale="en" switchHref="/news/" title="Horizon Daily — Aperio" description="Daily technology signals selected and organized by Horizon.">
+<BaseLayout locale="en" switchHref="/news/" title="Daily Brief — Aperio" description="Daily technology signals selected and organized by Horizon.">
   <header class="page-header channel-header">
     <p class="eyebrow">Daily signal</p>
-    <h1>Horizon<br />Daily</h1>
+    <h1>Daily Brief</h1>
     <p>The signals worth a second look, selected from each day’s information flow.</p>
   </header>
 
-  <section class="issue-list" aria-label="Horizon Daily archive">
+  <section class="issue-list" aria-label="Daily Brief archive">
     {dates.map((date, index) => (
       <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
         <p class="issue-number">{String(dates.length - index).padStart(2, "0")}</p>
         <div>
-          <p class="eyebrow">Horizon daily</p>
+          <p class="eyebrow">Daily brief</p>
           <h2><a href={`/en/news/${date}/`}>{formatIssueDate(date, "en")}</a></h2>
         </div>
         <a class="row-arrow" href={`/en/news/${date}/`} aria-label={`Read ${formatIssueDate(date, "en")}`}>↗</a>

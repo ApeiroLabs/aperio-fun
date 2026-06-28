@@ -1,4 +1,4 @@
-# Horizon Daily - 2026-06-28
+# Daily Brief - 2026-06-28
 
 > From 23 items, 7 important content pieces were selected
 
@@ -140,4 +140,3 @@ hackernews · pawal · Jun 27, 22:11 · [Discussion](https://news.ycombinator.co
 **Tags**: `#DNS`, `#privacy`, `#networking`, `#security`
 
 ---
-

@@ -1,4 +1,4 @@
-# Horizon Daily - 2026-06-27
+# Daily Brief - 2026-06-27
 
 > From 24 items, 10 important content pieces were selected
 
@@ -201,4 +201,3 @@ hackernews · gjvc · Jun 26, 21:18 · [Discussion](https://news.ycombinator.com
 **Tags**: `#C++`, `#hash map`, `#hopscotch hashing`, `#data structures`
 
 ---
-

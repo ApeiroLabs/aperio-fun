@@ -1,4 +1,4 @@
-# Horizon Daily - 2026-06-24
+# Daily Brief - 2026-06-24
 
 > From 30 items, 12 important content pieces were selected
 
@@ -283,4 +283,3 @@ twitter · kabikabi · Jun 23, 12:13
 **Tags**: `#DeepSeek`, `#cache`, `#cost efficiency`, `#long-context`
 
 ---
-

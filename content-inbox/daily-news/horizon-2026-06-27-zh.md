@@ -1,4 +1,4 @@
-# Horizon 每日速递 - 2026-06-27
+# 每日速递 - 2026-06-27
 
 > 从 24 条内容中筛选出 10 条重要资讯。
 
@@ -201,4 +201,3 @@ hackernews · gjvc · 6月26日 21:18 · [社区讨论](https://news.ycombinator
 **标签**: `#C++`, `#hash map`, `#hopscotch hashing`, `#data structures`
 
 ---
-

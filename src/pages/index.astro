@@ -21,17 +21,19 @@ const posts = (await getCollection("blog", ({ data }) => !data.draft && data.lan
     <div class="hero-mark" aria-hidden="true">A</div>
   </section>
 
-  <section class="latest" aria-labelledby="latest-title">
-    <div class="section-heading">
-      <p class="eyebrow">Latest writing</p>
-      <h2 id="latest-title">最近写下的</h2>
-      <span>{String(posts.length).padStart(2, "0")}</span>
-    </div>
-    <div class="article-list">
-      {posts.slice(0, 5).map((post, index) => <ArticleRow post={post} index={index} />)}
-    </div>
-    <a class="text-link" href="/writing/">查看所有文章 <span>→</span></a>
-  </section>
+  {posts.length > 0 && (
+    <section class="latest" aria-labelledby="latest-title">
+      <div class="section-heading">
+        <p class="eyebrow">Latest writing</p>
+        <h2 id="latest-title">最近写下的</h2>
+        <span>{String(posts.length).padStart(2, "0")}</span>
+      </div>
+      <div class="article-list">
+        {posts.slice(0, 5).map((post, index) => <ArticleRow post={post} index={index} />)}
+      </div>
+      <a class="text-link" href="/writing/">查看所有文章 <span>→</span></a>
+    </section>
+  )}
 
   <aside class="home-note">
     <p class="eyebrow">About this place</p>

@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { issue } = Astro.props;
 const { Content } = await render(issue.entry);
-const title = `Horizon Daily · ${formatIssueDate(issue.date, "en")}`;
+const title = `Daily Brief · ${formatIssueDate(issue.date, "en")}`;
 ---
 
 <BaseLayout
@@ -29,7 +29,7 @@ const title = `Horizon Daily · ${formatIssueDate(issue.date, "en")}`;
     <header class="report-header">
       <a class="back-link" href="/en/news/">← All daily issues</a>
       <p class="eyebrow">Horizon · {issue.date}</p>
-      <h1>Horizon Daily</h1>
+      <h1>Daily Brief</h1>
       <div class="report-meta">
         <time datetime={issue.date}>{formatIssueDate(issue.date, "en")}</time>
         <span>English</span>

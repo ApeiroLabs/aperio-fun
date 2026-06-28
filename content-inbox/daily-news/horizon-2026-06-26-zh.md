@@ -1,4 +1,4 @@
-# Horizon 每日速递 - 2026-06-26
+# 每日速递 - 2026-06-26
 
 > 从 34 条内容中筛选出 10 条重要资讯。
 
@@ -184,4 +184,3 @@ hackernews · engomez · 6月25日 16:04 · [社区讨论](https://news.ycombina
 **标签**: `#open-source`, `#note-taking`, `#AI`, `#markdown`, `#knowledge-management`
 
 ---
-

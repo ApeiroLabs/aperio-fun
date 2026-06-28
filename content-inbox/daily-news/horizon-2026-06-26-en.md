@@ -1,4 +1,4 @@
-# Horizon Daily - 2026-06-26
+# Daily Brief - 2026-06-26
 
 > From 34 items, 10 important content pieces were selected
 
@@ -184,4 +184,3 @@ hackernews · engomez · Jun 25, 16:04 · [Discussion](https://news.ycombinator.
 **Tags**: `#open-source`, `#note-taking`, `#AI`, `#markdown`, `#knowledge-management`
 
 ---
-

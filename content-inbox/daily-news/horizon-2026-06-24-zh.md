@@ -1,4 +1,4 @@
-# Horizon 每日速递 - 2026-06-24
+# 每日速递 - 2026-06-24
 
 > 从 30 条内容中筛选出 12 条重要资讯。
 
@@ -283,4 +283,3 @@ twitter · kabikabi · 6月23日 12:13
 **标签**: `#DeepSeek`, `#cache`, `#cost efficiency`, `#long-context`
 
 ---
-

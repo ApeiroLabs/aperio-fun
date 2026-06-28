@@ -1,4 +1,4 @@
-# Horizon 每日速递 - 2026-06-28
+# 每日速递 - 2026-06-28
 
 > 从 23 条内容中筛选出 7 条重要资讯。
 
@@ -140,4 +140,3 @@ hackernews · pawal · 6月27日 22:11 · [社区讨论](https://news.ycombinato
 **标签**: `#DNS`, `#privacy`, `#networking`, `#security`
 
 ---
-

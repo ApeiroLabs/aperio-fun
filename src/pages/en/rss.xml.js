@@ -13,7 +13,7 @@ export async function GET(context) {
     description: "Daily signals and writing from Aperio.",
     site: context.site,
     items: issues.map((issue) => ({
-      title: `Horizon Daily · ${formatIssueDate(issue.date, "en")}`,
+      title: `Daily Brief · ${formatIssueDate(issue.date, "en")}`,
       description: "Daily technology signals selected and organized by Horizon.",
       pubDate: new Date(`${issue.date}T00:00:00Z`),
       link: `/en/news/${issue.date}/`

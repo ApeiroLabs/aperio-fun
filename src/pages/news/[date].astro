@@ -16,7 +16,7 @@ export async function getStaticPaths() {
 
 const { issue } = Astro.props;
 const { Content } = await render(issue.entry);
-const title = `Horizon 每日速递 · ${formatIssueDate(issue.date, "zh")}`;
+const title = `每日速递 · ${formatIssueDate(issue.date, "zh")}`;
 ---
 
 <BaseLayout

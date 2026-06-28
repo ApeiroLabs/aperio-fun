@@ -31,7 +31,7 @@ const issues = (await getCollection("dailyNews"))
   <section class="latest" aria-labelledby="latest-title">
     <div class="section-heading">
       <p class="eyebrow">Latest signals</p>
-      <h2 id="latest-title">Horizon Daily</h2>
+      <h2 id="latest-title">Daily Brief</h2>
       <span>{String(issues.length).padStart(2, "0")}</span>
     </div>
     <div class="issue-list home-issue-list">
@@ -39,10 +39,10 @@ const issues = (await getCollection("dailyNews"))
         <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
           <p class="issue-number">{String(issues.length - index).padStart(2, "0")}</p>
           <div>
-            <p class="eyebrow">Horizon daily</p>
+            <p class="eyebrow">Daily brief</p>
             <h2><a href={`/en/news/${issue.date}/`}>{formatIssueDate(issue.date, "en")}</a></h2>
           </div>
-          <a class="row-arrow" href={`/en/news/${issue.date}/`} aria-label={`Read Horizon Daily for ${formatIssueDate(issue.date, "en")}`}>↗</a>
+          <a class="row-arrow" href={`/en/news/${issue.date}/`} aria-label={`Read the Daily Brief for ${formatIssueDate(issue.date, "en")}`}>↗</a>
         </article>
       ))}
     </div>
