@@ -1,0 +1,21 @@
+---
+import { localeMeta, type Locale } from "../config/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = "zh" } = Astro.props;
+const copy = locale === "zh"
+  ? { note: "在互联网上留一间安静的房间。", mail: "来信" }
+  : { note: "A quiet room on the internet.", mail: "Email" };
+---
+
+<footer class="site-footer">
+  <p>{copy.note}</p>
+  <div>
+    <span>© {new Date().getFullYear()} Aperio</span>
+    <a href={localeMeta[locale].rss}>RSS</a>
+    <a href="mailto:hello@aperio.fun">{copy.mail}</a>
+  </div>
+</footer>

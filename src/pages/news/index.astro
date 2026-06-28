@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatIssueDate, parseDailyIssue } from "../../lib/content";
+
+const issues = (await getCollection("dailyNews")).map(parseDailyIssue).filter((issue) => issue.lang === "zh");
+const dates = [...new Set(issues.map((issue) => issue.date))].sort().reverse();
+---
+
+<BaseLayout title="Horizon 每日速递 — Aperio" description="由 Horizon 筛选和整理的每日科技资讯。" switchHref="/en/news/">
+  <header class="page-header channel-header">
+    <p class="eyebrow">Daily signal</p>
+    <h1>Horizon<br />每日速递</h1>
+    <p>从每天的信息流里，留下真正值得多看一眼的信号。</p>
+  </header>
+
+  <section class="issue-list" aria-label="Horizon 每日速递归档">
+    {dates.map((date, index) => {
+      return (
+        <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
+          <p class="issue-number">{String(dates.length - index).padStart(2, "0")}</p>
+          <div>
+            <p class="eyebrow">Horizon daily</p>
+            <h2><a href={`/news/${date}/`}>{formatIssueDate(date)}</a></h2>
+          </div>
+          <a class="row-arrow" href={`/news/${date}/`} aria-label={`阅读 ${date} 每日速递`}>↗</a>
+        </article>
+      );
+    })}
+  </section>
+</BaseLayout>

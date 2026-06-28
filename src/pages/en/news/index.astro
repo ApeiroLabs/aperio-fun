@@ -1,0 +1,31 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { formatIssueDate, parseDailyIssue } from "../../../lib/content";
+
+const issues = (await getCollection("dailyNews"))
+  .map(parseDailyIssue)
+  .filter((issue) => issue.lang === "en");
+const dates = issues.map((issue) => issue.date).sort().reverse();
+---
+
+<BaseLayout locale="en" switchHref="/news/" title="Horizon Daily — Aperio" description="Daily technology signals selected and organized by Horizon.">
+  <header class="page-header channel-header">
+    <p class="eyebrow">Daily signal</p>
+    <h1>Horizon<br />Daily</h1>
+    <p>The signals worth a second look, selected from each day’s information flow.</p>
+  </header>
+
+  <section class="issue-list" aria-label="Horizon Daily archive">
+    {dates.map((date, index) => (
+      <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
+        <p class="issue-number">{String(dates.length - index).padStart(2, "0")}</p>
+        <div>
+          <p class="eyebrow">Horizon daily</p>
+          <h2><a href={`/en/news/${date}/`}>{formatIssueDate(date, "en")}</a></h2>
+        </div>
+        <a class="row-arrow" href={`/en/news/${date}/`} aria-label={`Read ${formatIssueDate(date, "en")}`}>↗</a>
+      </article>
+    ))}
+  </section>
+</BaseLayout>

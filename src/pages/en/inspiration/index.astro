@@ -1,0 +1,41 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { contentLocaleFromId } from "../../../config/i18n";
+import { formatIssueDate, inspirationDate } from "../../../lib/content";
+
+const entries = (await getCollection("inspiration"))
+  .filter((entry) => contentLocaleFromId(entry.id) === "en")
+  .sort((a, b) => inspirationDate(b).localeCompare(inspirationDate(a)));
+---
+
+<BaseLayout locale="en" switchHref="/inspiration/" title="Inspiration Radar — Aperio" description="Field notes drawn from real behavior, tensions, and product observations.">
+  <header class="page-header channel-header inspiration-header">
+    <p class="eyebrow">Field notes</p>
+    <h1>Inspiration<br />Radar</h1>
+    <p>Not a list of ideas, but questions, evidence, and directions that still need testing.</p>
+  </header>
+
+  {entries.length > 0 ? (
+    <section class="issue-list inspiration-list" aria-label="Inspiration archive">
+      {entries.map((entry, index) => {
+        const date = inspirationDate(entry);
+        return (
+          <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
+            <p class="issue-number">{String(entries.length - index).padStart(2, "0")}</p>
+            <div>
+              <p class="eyebrow">Inspiration radar</p>
+              <h2><a href={`/en/inspiration/${entry.id}/`}>{formatIssueDate(date, "en")}</a></h2>
+            </div>
+            <a class="row-arrow" href={`/en/inspiration/${entry.id}/`} aria-label={`View inspiration radar for ${date}`}>↗</a>
+          </article>
+        );
+      })}
+    </section>
+  ) : (
+    <div class="empty-state">
+      <p class="eyebrow">Nothing published yet</p>
+      <p>English field notes will appear here when they are ready.</p>
+    </div>
+  )}
+</BaseLayout>

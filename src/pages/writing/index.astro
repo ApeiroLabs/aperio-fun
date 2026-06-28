@@ -1,0 +1,19 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ArticleRow from "../../components/ArticleRow.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft && data.lang === "zh"))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<BaseLayout title="所有文章 — Aperio" description="Aperio 的全部文章与随笔。" switchHref="/en/writing/">
+  <header class="page-header">
+    <p class="eyebrow">Archive · {String(posts.length).padStart(2, "0")}</p>
+    <h1>所有文章</h1>
+    <p>一些观察，一些实践，以及尚未完全想明白的事。</p>
+  </header>
+  <div class="article-list archive-list">
+    {posts.map((post, index) => <ArticleRow post={post} index={index} />)}
+  </div>
+</BaseLayout>

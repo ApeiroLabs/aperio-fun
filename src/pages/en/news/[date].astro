@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { formatIssueDate, parseDailyIssue } from "../../../lib/content";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("dailyNews");
+  return entries
+    .map(parseDailyIssue)
+    .filter((issue) => issue.lang === "en")
+    .map((issue) => ({
+      params: { date: issue.date },
+      props: { issue }
+    }));
+}
+
+const { issue } = Astro.props;
+const { Content } = await render(issue.entry);
+const title = `Horizon Daily · ${formatIssueDate(issue.date, "en")}`;
+---
+
+<BaseLayout
+  locale="en"
+  switchHref={`/news/${issue.date}/`}
+  title={`${title} — Aperio`}
+  description="Daily technology signals selected and organized by Horizon."
+>
+  <article class="report">
+    <header class="report-header">
+      <a class="back-link" href="/en/news/">← All daily issues</a>
+      <p class="eyebrow">Horizon · {issue.date}</p>
+      <h1>Horizon Daily</h1>
+      <div class="report-meta">
+        <time datetime={issue.date}>{formatIssueDate(issue.date, "en")}</time>
+        <span>English</span>
+      </div>
+    </header>
+    <div class="prose generated-report prose-en">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

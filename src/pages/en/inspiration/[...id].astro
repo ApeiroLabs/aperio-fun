@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import { contentLocaleFromId } from "../../../config/i18n";
+import { formatIssueDate, inspirationDate } from "../../../lib/content";
+
+export async function getStaticPaths() {
+  const entries = (await getCollection("inspiration"))
+    .filter((entry) => contentLocaleFromId(entry.id) === "en");
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const date = inspirationDate(entry);
+const { Content } = await render(entry);
+---
+
+<BaseLayout locale="en" switchHref="/inspiration/" title={`Inspiration Radar · ${formatIssueDate(date, "en")} — Aperio`}>
+  <article class="report inspiration-report">
+    <header class="report-header">
+      <a class="back-link" href="/en/inspiration/">← Inspiration Radar</a>
+      <p class="eyebrow">Field notes · {date}</p>
+      <h1>Inspiration Radar</h1>
+      <div class="report-meta">
+        <time datetime={date}>{formatIssueDate(date, "en")}</time>
+        <span>Field notes</span>
+      </div>
+    </header>
+    <div class="prose generated-report prose-en">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

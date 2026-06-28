@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatIssueDate, inspirationDate } from "../../lib/content";
+import { contentLocaleFromId } from "../../config/i18n";
+
+const entries = (await getCollection("inspiration"))
+  .filter((entry) => contentLocaleFromId(entry.id) === "zh")
+  .sort((a, b) => inspirationDate(b).localeCompare(inspirationDate(a)));
+---
+
+<BaseLayout title="灵感雷达 — Aperio" description="来自真实行为、消费矛盾与产品观察的灵感记录。" switchHref="/en/inspiration/">
+  <header class="page-header channel-header inspiration-header">
+    <p class="eyebrow">Field notes</p>
+    <h1>灵感<br />雷达</h1>
+    <p>不是点子清单，而是从真实行为中留下问题、证据和仍需验证的方向。</p>
+  </header>
+
+  <section class="issue-list inspiration-list" aria-label="灵感归档">
+    {entries.map((entry, index) => {
+      const date = inspirationDate(entry);
+      return (
+        <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
+          <p class="issue-number">{String(entries.length - index).padStart(2, "0")}</p>
+          <div>
+            <p class="eyebrow">Inspiration radar</p>
+            <h2><a href={`/inspiration/${entry.id}/`}>{formatIssueDate(date)}</a></h2>
+            <p class="issue-description">消费矛盾、行为证据与值得继续追踪的方向。</p>
+          </div>
+          <a class="row-arrow" href={`/inspiration/${entry.id}/`} aria-label={`查看 ${date} 灵感雷达`}>↗</a>
+        </article>
+      );
+    })}
+  </section>
+</BaseLayout>

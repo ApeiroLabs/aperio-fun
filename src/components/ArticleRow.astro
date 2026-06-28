@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { localizedPath, type Locale } from "../config/i18n";
+
+interface Props {
+  post: CollectionEntry<"blog">;
+  index?: number;
+  locale?: Locale;
+}
+
+const { post, index, locale = "zh" } = Astro.props;
+const date = post.data.publishedAt.toLocaleDateString(locale === "zh" ? "zh-CN" : "en-US", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit"
+}).replaceAll("/", ".");
+---
+
+<article class="article-row reveal" style={`--delay: ${(index ?? 0) * 80}ms`}>
+  <div class="article-meta">
+    <time datetime={post.data.publishedAt.toISOString()}>{date}</time>
+    <span>{post.data.tags[0] ?? "随笔"}</span>
+  </div>
+  <div class="article-summary">
+    <h2><a href={localizedPath(locale, `/writing/${post.id}/`)}>{post.data.title}</a></h2>
+    <p>{post.data.description}</p>
+  </div>
+  <a class="row-arrow" href={localizedPath(locale, `/writing/${post.id}/`)} aria-label={locale === "zh" ? `阅读《${post.data.title}》` : `Read ${post.data.title}`}>↗</a>
+</article>

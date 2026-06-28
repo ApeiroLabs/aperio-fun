@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import ArticleRow from "../../../components/ArticleRow.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft && data.lang === "en"))
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+---
+
+<BaseLayout locale="en" switchHref="/writing/" title="Writing — Aperio" description="Essays and notes from Aperio.">
+  <header class="page-header">
+    <p class="eyebrow">Archive · {String(posts.length).padStart(2, "0")}</p>
+    <h1>Writing</h1>
+    <p>Observations, experiments, and questions that are still taking shape.</p>
+  </header>
+  {posts.length > 0 ? (
+    <div class="article-list archive-list">
+      {posts.map((post, index) => <ArticleRow post={post} index={index} locale="en" />)}
+    </div>
+  ) : (
+    <div class="empty-state">
+      <p class="eyebrow">Nothing published yet</p>
+      <p>English essays will appear here when they are ready.</p>
+    </div>
+  )}
+</BaseLayout>

@@ -1,0 +1,36 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatIssueDate, inspirationDate } from "../../lib/content";
+import { contentLocaleFromId } from "../../config/i18n";
+
+export async function getStaticPaths() {
+  const entries = (await getCollection("inspiration"))
+    .filter((entry) => contentLocaleFromId(entry.id) === "zh");
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry }
+  }));
+}
+
+const { entry } = Astro.props;
+const date = inspirationDate(entry);
+const { Content } = await render(entry);
+---
+
+<BaseLayout title={`灵感雷达 · ${formatIssueDate(date)} — Aperio`} description="来自真实行为、消费矛盾与产品观察的灵感记录。" switchHref="/en/inspiration/">
+  <article class="report inspiration-report">
+    <header class="report-header">
+      <a class="back-link" href="/inspiration/">← 返回灵感雷达</a>
+      <p class="eyebrow">Field notes · {date}</p>
+      <h1>灵感雷达</h1>
+      <div class="report-meta">
+        <time datetime={date}>{formatIssueDate(date)}</time>
+        <span>研究手记</span>
+      </div>
+    </header>
+    <div class="prose generated-report">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

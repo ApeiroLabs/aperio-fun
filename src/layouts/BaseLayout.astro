@@ -1,0 +1,52 @@
+---
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { localeMeta, type Locale } from "../config/i18n";
+import "@fontsource-variable/noto-serif-sc/wght.css";
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  locale?: Locale;
+  switchHref?: string;
+}
+
+const {
+  title = "Aperio — 观察、思考与未完成的答案",
+  description = "一间关于技术、创造与日常观察的个人写作空间。",
+  locale = "zh",
+  switchHref = locale === "zh" ? "/en/" : "/"
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const alternateLocale = locale === "zh" ? "en" : "zh";
+const alternate = new URL(switchHref, Astro.site);
+---
+
+<!doctype html>
+<html lang={localeMeta[locale].htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f5f0e7" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={localeMeta[alternateLocale].htmlLang} href={alternate} />
+    <link rel="alternate" type="application/rss+xml" title="Aperio RSS" href={localeMeta[locale].rss} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <Header locale={locale} switchHref={switchHref} />
+      <main id="main-content">
+        <slot />
+      </main>
+      <Footer locale={locale} />
+    </div>
+  </body>
+</html>

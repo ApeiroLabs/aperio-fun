@@ -1,0 +1,57 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { formatIssueDate, parseDailyIssue } from "../../lib/content";
+
+const issues = (await getCollection("dailyNews"))
+  .map(parseDailyIssue)
+  .filter((issue) => issue.lang === "en")
+  .sort((a, b) => b.date.localeCompare(a.date));
+---
+
+<BaseLayout
+  locale="en"
+  switchHref="/"
+  title="Aperio — Signals, ideas, and writing"
+  description="A personal field journal about technology, creativity, and the details worth a second look."
+>
+  <section class="hero hero-en hero-compact">
+    <p class="hero-kicker reveal">A personal field journal</p>
+    <h1 class="hero-title hero-title-short">
+      <span class="reveal">Stay</span>
+      <span class="hero-indent reveal">curious.</span>
+    </h1>
+    <div class="hero-note reveal">
+      <span class="note-number">01</span>
+      <p>Technology, creativity, and the things in ordinary life that deserve a second look.</p>
+    </div>
+    <div class="hero-mark" aria-hidden="true">A</div>
+  </section>
+
+  <section class="latest" aria-labelledby="latest-title">
+    <div class="section-heading">
+      <p class="eyebrow">Latest signals</p>
+      <h2 id="latest-title">Horizon Daily</h2>
+      <span>{String(issues.length).padStart(2, "0")}</span>
+    </div>
+    <div class="issue-list home-issue-list">
+      {issues.slice(0, 5).map((issue, index) => (
+        <article class="issue-row reveal" style={`--delay: ${index * 70}ms`}>
+          <p class="issue-number">{String(issues.length - index).padStart(2, "0")}</p>
+          <div>
+            <p class="eyebrow">Horizon daily</p>
+            <h2><a href={`/en/news/${issue.date}/`}>{formatIssueDate(issue.date, "en")}</a></h2>
+          </div>
+          <a class="row-arrow" href={`/en/news/${issue.date}/`} aria-label={`Read Horizon Daily for ${formatIssueDate(issue.date, "en")}`}>↗</a>
+        </article>
+      ))}
+    </div>
+    <a class="text-link" href="/en/news/">All daily issues <span>→</span></a>
+  </section>
+
+  <aside class="home-note">
+    <p class="eyebrow">About this place</p>
+    <blockquote>“Aperio” means to open, reveal, or bring into view. Writing lets a blurred thought meet the light.</blockquote>
+    <a class="text-link" href="/en/about/">About Aperio <span>→</span></a>
+  </aside>
+</BaseLayout>
