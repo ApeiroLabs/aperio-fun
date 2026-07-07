@@ -9,12 +9,11 @@ interface Props {
 const { locale = "zh", switchHref = locale === "zh" ? "/en/" : "/" } = Astro.props;
 const path = Astro.url.pathname;
 const labels = locale === "zh"
-  ? { writing: "文章", news: "速递", inspiration: "灵感", about: "关于", home: "Aperio 首页", skip: "跳到正文" }
-  : { writing: "Writing", news: "Daily", inspiration: "Ideas", about: "About", home: "Aperio home", skip: "Skip to content" };
+  ? { writing: "文章", news: "速递", about: "关于", home: "Aperio 首页", skip: "跳到正文" }
+  : { writing: "Writing", news: "Daily", about: "About", home: "Aperio home", skip: "Skip to content" };
 const links = [
   { href: localizedPath(locale, "/writing/"), label: labels.writing },
   { href: localizedPath(locale, "/news/"), label: labels.news },
-  { href: localizedPath(locale, "/inspiration/"), label: labels.inspiration },
   { href: localizedPath(locale, "/about/"), label: labels.about }
 ];
 const activePath = locale === "en" ? path.replace(/^\/en/, "") : path;
